@@ -14,6 +14,10 @@ app.get('/perguntar', (req, res) => {
   res.render('perguntar');
 });
 
+app.post('/salvarpergunta',(req, res) => {
+
+});
+
 app.listen(3000, () => {
   console.log('Servidor iniciado');
 });
