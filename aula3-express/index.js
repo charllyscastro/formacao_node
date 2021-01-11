@@ -11,11 +11,16 @@ app.get('/ola/:nome/:empresa', (req, res) => {
   res.send(`Oi! ${nome} ${empresa}`);
 });
 
-// parâmetro não obrigatorio
+// Parâmetro não obrigatorio
 app.get('/blog/:artigo?', (req, res) => {
   const artigo = req.params.artigo;
-  artigo ? res.send(`Artigo: ${artigo}`) : res.send(`Artigo: Parâmetro não obrigatório.`)
-  
+  artigo ? res.send(`Artigo: ${artigo}`) : res.send(`Artigo: Parâmetro não obrigatório.`);
+});
+
+// Query params
+app.get('/youtube', (req, res) => {
+  const canal = req.query['canal'];
+  canal ? res.send(`Canal: ${canal}`) : res.send('Canal não encontrado!');
 });
 
 app.listen(3000, (error) => {
