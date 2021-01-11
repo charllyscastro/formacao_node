@@ -19,3 +19,4 @@ INSERT INTO usuarios(nome, email, idade) VALUES(
 -- SELECT * FROM nome_tabela; - Lista todos os dados da tabela
 -- SELECT * FROM nome_tabela WHERE idade = 8; - Especificar consulta mysql
 -- DELETE FROM usuarios WHERE nome = "Joao"; - Deletar registros na tabela
+-- UPDATE nome_tabela SET nome = "Nome teste" WHERE nome = "Pedro"; - Atualiza campo da tabela
