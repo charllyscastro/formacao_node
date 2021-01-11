@@ -6,21 +6,9 @@ app.set('view engine', 'ejs');
 // Utilizando arquivos estaticos
 app.use(express.static('public'));
 
-app.get('/:nome?/:lang?', (req, res) => {
-  const nome = req.params.nome;
-  const lang = req.params.lang;
-  const msg = false;
-  const produtos = [
-    {nome: 'lapis', preco: 1},
-    {nome: 'caderno', preco: 5},
-    {nome: 'mochila', preco: 10}
-  ];
-  res.render('index',{
-    nome: nome, 
-    lang: lang,
-    msg,
-    produtos
-  });
+app.get('/', (req, res) => {
+ 
+  res.render('index');
 });
 
 app.listen(3000, () => {
