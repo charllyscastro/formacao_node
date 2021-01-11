@@ -8,10 +8,17 @@
 <body>
   <h1><%= nome %></h1>
   <h1><%= lang %></h1>
+
   <% if(msg) { %>
     <h1>Erro!</h1>
   <% }else { %>  
     <h1>Não houve erro!</h1>
   <% } %> 
+
+  <% produtos.forEach( produto => { %>
+    <ul>
+      <li>Item: <%= produto.nome %>, Preço: <%= produto.preco %> </li>
+    </ul>
+  <%}) %> 
 </body>
 </html>
