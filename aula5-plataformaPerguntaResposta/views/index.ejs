@@ -6,7 +6,12 @@
   <title>Guia perguntas</title>
 </head>
 <body>
-  <h1><%= nome %>  </h1>
-  <h1><%= lang %>  </h1>
+  <h1><%= nome %></h1>
+  <h1><%= lang %></h1>
+  <% if(msg) { %>
+    <h1>Erro!</h1>
+  <% }else { %>  
+    <h1>Não houve erro!</h1>
+  <% } %> 
 </body>
 </html>
