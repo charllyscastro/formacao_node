@@ -18,3 +18,4 @@ INSERT INTO usuarios(nome, email, idade) VALUES(
 -- INSERT INTO nome_banco() VALUES(); - Inseri dados na tabela
 -- SELECT * FROM nome_tabela; - Lista todos os dados da tabela
 -- SELECT * FROM nome_tabela WHERE idade = 8; - Especificar consulta mysql
+-- DELETE FROM usuarios WHERE nome = "Joao"; - Deletar registros na tabela
