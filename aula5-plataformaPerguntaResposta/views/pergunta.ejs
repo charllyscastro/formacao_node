@@ -2,12 +2,11 @@
 <body>
   <%- include('partials/navbar') %> 
     <div class="container">
-      <h1>Perguntas</h1>
-      <a href="/perguntar" class="btn btn-primary mb-3">Perguntar</a>
       
-        <div class="card mb-3">
+        <div class="card mt-3">
             <div class="card-body">
-              <p>titulo</p> 
+              <h1><%= pergunta.titulo %> </h1> 
+              <p><%= pergunta.descricao %> </p>
             </div>
             <div class="card-footer">
               <button class="btn btn-primary">Responder</button>
