@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/database');
-const pergundaModel = require('./database/Pergunta');
+const Pergunta = require('./database/Pergunta');
 
 // Database
 connection
@@ -25,17 +25,30 @@ app.use(bodyParser.json()); // Usando json
 
 //Rotas
 app.get('/', (req, res) => {
-  res.render('index');
+  Pergunta.findAll({raw: true}).then( pergunta => {
+    res.render('index', {
+      pergunta
+    });
+  });
+  
 });
 
 app.get('/perguntar', (req, res) => {
+ 
   res.render('perguntar');
 });
 
 app.post('/salvarpergunta',(req, res) => {
   const titulo = req.body.titulo;
   const descricao = req.body.descricao;
-  res.send(`${titulo} ${descricao}`)
+   Pergunta.create({
+    titulo,
+    descricao
+  }).then(() => {
+    res.redirect('/');
+  }).catch((msgErro) => {
+    console.log(msgErro);
+  })
 });
 
 app.listen(3000, () => {

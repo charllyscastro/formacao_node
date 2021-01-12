@@ -3,6 +3,10 @@
   <%- include('partials/navbar') %> 
     <div class="container">
           <h1>Index</h1> 
+          <% pergunta.map(item => { %>
+            <p><%=item.titulo%></p>
+            <p><%=item.descricao%></p>
+          <% }) %> 
     </div>
 </body>
   <%- include('partials/footer') %> 
