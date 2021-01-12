@@ -2,11 +2,18 @@
 <body>
   <%- include('partials/navbar') %> 
     <div class="container">
-          <h1>Index</h1> 
-          <% pergunta.map(item => { %>
-            <p><%=item.titulo%></p>
-            <p><%=item.descricao%></p>
-          <% }) %> 
+      <h1>Perguntas</h1>
+      <a href="/perguntar" class="btn btn-primary mb-3">Perguntar</a>
+      <% perguntas.forEach(pergunta => { %>
+        <div class="card mb-3">
+            <div class="card-body">
+              <p><%=pergunta.titulo%></p> 
+            </div>
+            <div class="card-footer">
+              <button class="btn btn-primary">Responder</button>
+            </div>
+        </div>   
+      <% }) %> 
     </div>
 </body>
   <%- include('partials/footer') %> 

@@ -25,9 +25,9 @@ app.use(bodyParser.json()); // Usando json
 
 //Rotas
 app.get('/', (req, res) => {
-  Pergunta.findAll({raw: true}).then( pergunta => {
+  Pergunta.findAll({raw: true}).then( perguntas => {
     res.render('index', {
-      pergunta
+      perguntas
     });
   });
   
@@ -41,14 +41,19 @@ app.get('/perguntar', (req, res) => {
 app.post('/salvarpergunta',(req, res) => {
   const titulo = req.body.titulo;
   const descricao = req.body.descricao;
-   Pergunta.create({
-    titulo,
-    descricao
-  }).then(() => {
-    res.redirect('/');
-  }).catch((msgErro) => {
-    console.log(msgErro);
-  })
+  if(titulo){
+    Pergunta.create({
+      titulo,
+      descricao
+    }).then(() => {
+      res.redirect('/');
+    }).catch((msgErro) => {
+      console.log(msgErro);
+    })
+  }else{
+    res.redirect('/perguntar');
+  }
+   
 });
 
 app.listen(3000, () => {
