@@ -7,21 +7,24 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>Item</th>
             <th>Título</th>
             <th>Slug</th>
             <th>Ações</th>
           </tr> 
         </thead>
         <tbody>
-            <% categories.forEach(category => { %>
+            <% categories.forEach((category, index) => { %>
               <tr>
-                <th><%= category.id %></th>
+                <th><%= index + 1 %></th>
                 <th><%= category.title %></th>   
                 <th><%= category.slug %></th>
                 <th>
                   <button class="btn btn-warning mr-2">Editar</button>
-                  <button class="btn btn-danger">Deletar</button>
+                  <form method="POST" action="/categories/delete" style="display: inline;">
+                    <input type="hidden" name="id" value="<%= category.id %>" >
+                    <button  class="btn btn-danger">Deletar</button>
+                  </form>
                 </th>
               </tr>
             <% }) %>    
