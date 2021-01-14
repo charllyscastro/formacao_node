@@ -12,4 +12,6 @@ const Category = connection.define('categories',{
   }
 });
 
+//Category.sync({force: true}); //Cria a tabela ao executar o programa
+
 module.exports = Category;
