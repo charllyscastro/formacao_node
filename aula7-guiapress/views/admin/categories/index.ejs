@@ -2,7 +2,8 @@
 <%- include('../../partials/navbar') %> 
 
     <div class="container">
-      <h2 class="mt-4 mb-4">Categorias</h2>
+      <h2 class="mt-4">Categorias</h2>
+      <a href="/admin/categories/new" class="btn btn-success mb-3">Criar nova categoria</a>
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -19,8 +20,8 @@
                 <th><%= category.title %></th>   
                 <th><%= category.slug %></th>
                 <th>
-                  <button class="btn btn-primary mr-2">Editar</button>
-                  <button class="btn btn-danger">Excluir</button>
+                  <button class="btn btn-warning mr-2">Editar</button>
+                  <button class="btn btn-danger">Deletar</button>
                 </th>
               </tr>
             <% }) %>    

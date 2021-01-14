@@ -9,7 +9,7 @@ router.get('/admin/categories/new', (req, res) => {
 
 router.post('/categories/save', (req, res) => {
   const title = req.body.title;
-  if(title != undefined){
+  if(title){
     Category.create({
       title: title,
       slug: slugify(title)
