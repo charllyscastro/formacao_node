@@ -16,11 +16,11 @@
         <tbody>
             <% categories.forEach((category, index) => { %>
               <tr>
-                <th><%= index + 1 %></th>
+                <th><%= category.id %></th>
                 <th><%= category.title %></th>   
                 <th><%= category.slug %></th>
                 <th>
-                  <button class="btn btn-warning mr-2">Editar</button>
+                  <a href="/admin/categories/edit/<%= category.id %> " class="btn btn-warning mr-2">Editar</a>
                   <form onsubmit="confirmDelete(event, this)" method="POST" action="/categories/delete" style="display: inline;">
                     <input type="hidden" name="id" value="<%= category.id %>" >
                     <button  class="btn btn-danger">Deletar</button>
