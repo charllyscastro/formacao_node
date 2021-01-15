@@ -20,15 +20,18 @@ router.post('/articles/save', (req, res) => {
   const title = req.body.title;
   const body = req.body.body;
   const category = req.body.category;
-
-  Article.create({
-    title: title,
-    slug: slugify(title),
-    body: body,
-    categoryId: category
-  }).then(() => {
+  if(!title){
     res.redirect('/admin/articles');
-  });
-})
+  }else{
+    Article.create({
+      title: title,
+      slug: slugify(title),
+      body: body,
+      categoryId: category
+    }).then(() => {
+      res.redirect('/admin/articles');
+    });
+  }
+});
 
 module.exports = router;
