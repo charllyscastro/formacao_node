@@ -7,8 +7,9 @@
           <h2>Editar categoria</h2>
         </div>
         <div class="card-body">
-          <form method="POST" action="/categories/save">
+          <form method="POST" action="/categories/update" onsubmit="confirmUpdate(event, this)">
             <input value="<%= category.title %> " class="form-control mb-4" type="text" name="title" placeholder="Defina o título da categoria">
+            <input type="hidden" name="id" value="<%= category.id %> ">
             <button class="btn btn-success">Atualizar</button>
           </form>
         </div>
@@ -16,3 +17,13 @@
     </div>
 
 <%- include('../../partials/footer') %>
+
+<script>
+  function confirmUpdate(event, form){
+    event.preventDefault();
+    const decision = confirm('Deseja atualizar a categoria?');
+    if(decision){
+      form.submit();
+    }
+  }
+</script>
