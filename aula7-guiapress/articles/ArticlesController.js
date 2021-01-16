@@ -5,7 +5,11 @@ const Category = require('../categories/Category');
 const slugify = require('slugify');
 
 router.get('/admin/articles', (req, res) => {
-  res.render('admin/articles/index');
+  Article.findAll().then(articles => {
+    res.render('admin/articles/index',{
+      articles: articles
+    });
+  });
 });
 
 router.get('/admin/articles/new', (req, res) => {
