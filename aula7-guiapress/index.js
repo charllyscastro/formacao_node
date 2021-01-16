@@ -70,6 +70,29 @@ app.get('/:slug', (req, res) => {
   });
 });
 
+app.get('/category/:slug', (req, res) => {
+  const slug = req.params.slug;
+  Category.findOne({
+    include: [{model: Article}],
+    where: {
+      slug: slug
+    }
+  }).then(category => {
+    if(category != undefined){
+      Category.findAll().then(categories => {
+        res.render('index',{
+          articles: category.articles,
+          categories: categories
+        });
+      });
+    }else{
+      res.redirect('/');
+    }
+  }).catch(err => {
+    res.redirect('/');
+  });
+});
+
 app.listen(3000, () => {
   console.log('Servidor iniciado');
 });
