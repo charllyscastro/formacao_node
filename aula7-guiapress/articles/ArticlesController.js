@@ -127,6 +127,7 @@ router.get('/articles/page/:num', (req, res) => {
       next= true
     }
     const result = {
+      page: parseInt(page),
       next: next,
       articles: articles
     }
