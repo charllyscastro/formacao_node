@@ -10,6 +10,19 @@
       <li class="navbar-item">
         <a href="/" class="nav-link">Home</a>
       </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Categorias
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <% categories.forEach(category => { %>
+            <a class="dropdown-item" href="#"><%= category.title %></a>
+          <% }) %>
+        </div>
+      </li>
+
+
     </ul>
   </div>
   
