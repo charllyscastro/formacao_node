@@ -42,6 +42,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/:slug', (req, res) => {
+  const slug = req.params.slug;
   Article.findOne({
     where: {
       slug: slug
