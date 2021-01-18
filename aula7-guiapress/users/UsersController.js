@@ -7,7 +7,13 @@ router.get('/admin/users', (req, res) => {
 });
 
 router.get('/admin/users/create', (req, res) => {
-  res.render('users/create');
+  res.render('admin/users/create');
+});
+
+router.post('/users/create', (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  res.json({email, password})
 });
 
 module.exports = router;
