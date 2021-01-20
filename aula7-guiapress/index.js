@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const connection = require('./database/database');
+const session = require('express-session');
+require('dotenv').config()
 
 // Controllers
 const categoriesController = require('./categories/CategoriesController');
@@ -16,6 +18,13 @@ const Users = require('./users/Users');
 // View engine
 app.set('view engine', 'ejs');
 
+//Sessions
+app.use(session({
+  secret: process.env.SESSION,
+  cookie: {
+    maxAge: 30000
+  }
+}));
 // Arquivos estáticos
 app.use(express.static('public'));
 
