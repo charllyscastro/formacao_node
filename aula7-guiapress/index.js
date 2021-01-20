@@ -22,7 +22,7 @@ app.set('view engine', 'ejs');
 app.use(session({
   secret: process.env.SESSION,
   cookie: {
-    maxAge: 30000
+    maxAge: 10080000
   }
 }));
 // Arquivos estáticos
