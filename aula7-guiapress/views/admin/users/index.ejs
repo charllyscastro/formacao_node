@@ -1,0 +1,32 @@
+<%- include('../../partials/header') %> 
+<%- include('../../partials/navbar') %> 
+
+<div class="container">
+  <div class="card mt-3">
+    <div class="card-header">
+      <h2>Listagem de usuário</h2>
+      <a class="btn btn-success" href="/admin/users/create">Criar novo usuário</a>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach(user => { %>
+            <tr>
+              <td><%= user.id %> </td>
+              <td><%= user.email %> </td>
+            </tr>
+          <% }); %> 
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<%- include('../../partials/footer') %> 
+
