@@ -16,7 +16,7 @@ function pegarEmail(id){
 function enviarEmail(corpo, para){
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      const deucerto = false;
+      const deucerto = true;
       if(deucerto){
         resolve({time: '6s', to: 'char@email.com'});
       }else{
@@ -29,11 +29,12 @@ function enviarEmail(corpo, para){
 async function principal(){
   const id = await pegarId();
   const email = await pegarEmail(id);
-  enviarEmail("ola",email).then(({time, to}) => {
-          console.log(time, to)
-        }).catch((err) => {
-          console.log(err);
-        });
+  try {
+    await enviarEmail("ola",email);
+    console.log('Deu certo');
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 principal();
