@@ -24,7 +24,11 @@
 
       function deleteGame(listItem){
         const id = listItem.getAttribute("data-id");
-        axios.delete(`http://localhost:3000/games/${id}`);
+        axios.delete(`http://localhost:3000/games/${id}`).then(response => {
+          alert("Game deletado");
+        }).catch(error => {
+          console.log(error);
+        });
         window.location.reload(true);
       }
 
