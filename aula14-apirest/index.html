@@ -9,22 +9,58 @@
   <hr>
   <h4>Lista de games</h4>
   <ul id="game"></ul>
+  <hr>
+  <h4>Novo game</h4>
+  <input type="text" name="title" id="title" placeholder="Titulo"><br>
+  <input type="number" name="year" id="year" placeholder="Ano"><br>
+  <input type="number" name="price" id="price" placeholder="Preço"><br>
+  <button type="button" onclick="createGame()">Enviar</button>
 
 
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-  axios.get('http://localhost:3000/games').then(response => {
-    let games = response.data;
-    let list = document.getElementById("game");
-    games.forEach(game => {
-      let item = document.createElement("li");
-      item.innerHTML = `${game.id} - ${game.title} - $${game.price}`;
-      list.appendChild(item);
+
+
+      function createGame(){
+        const titleInput = document.getElementById("title");
+        const yearInput = document.getElementById("year");
+        const priceInput = document.getElementById("price");
+
+        const game = {
+          title: titleInput.value,
+          year: yearInput.value,
+          price: priceInput.value
+        }
+        axios.post('http://localhost:3000/games', game).then(response => {
+          if(response.status == 200){
+            alert('produto cadastrado com sucesso!')
+            titleInput.value = "";
+            yearInput.value = "";
+            priceInput.value = "";
+            window.location.reload(true);
+          }
+        }).catch(error => {
+          console.log(error);
+        })
+        
+      }
+  
+      axios.get('http://localhost:3000/games').then(response => {
+      const games = response.data;
+      const list = document.getElementById("game");
+      games.forEach(game => {
+        const item = document.createElement("li");
+        item.innerHTML = `${game.id} - ${game.title} - $${game.price}`;
+        list.appendChild(item);
+      });
+    }).catch(error => {
+      console.log(error);
     });
-  }).catch(error => {
-    console.log(error);
-  });
+
+    
+ 
+  
 </script>
 </html>
