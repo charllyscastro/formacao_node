@@ -22,6 +22,11 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 
+      function deleteGame(listItem){
+        const id = listItem.getAttribute("data-id");
+        axios.delete(`http://localhost:3000/games/${id}`);
+        window.location.reload(true);
+      }
 
       function createGame(){
         const titleInput = document.getElementById("title");
@@ -52,7 +57,19 @@
       const list = document.getElementById("game");
       games.forEach(game => {
         const item = document.createElement("li");
+        item.setAttribute("data-id", game.id);
+        item.setAttribute("data-title", game.title);
+        item.setAttribute("data-year", game.year);
+        item.setAttribute("data-price", game.price);
         item.innerHTML = `${game.id} - ${game.title} - $${game.price}`;
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = "Deletar";
+        deleteBtn.addEventListener("click", function(){
+          deleteGame(item);
+        });
+
+        item.appendChild(deleteBtn);
         list.appendChild(item);
       });
     }).catch(error => {
