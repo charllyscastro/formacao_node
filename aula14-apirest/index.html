@@ -6,12 +6,23 @@
   <title>Loja games</title>
 </head>
 <body>
-  
+  <hr>
+  <h4>Lista de games</h4>
+  <ul id="game"></ul>
+
+
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
   axios.get('http://localhost:3000/games').then(response => {
-    console.log(response);
+    let games = response.data;
+    let list = document.getElementById("game");
+    games.forEach(game => {
+      let item = document.createElement("li");
+      item.innerHTML = `${game.id} - ${game.title} - $${game.price}`;
+      list.appendChild(item);
+    });
   }).catch(error => {
     console.log(error);
   });
