@@ -15,12 +15,50 @@
   <input type="number" name="year" id="year" placeholder="Ano"><br>
   <input type="number" name="price" id="price" placeholder="Preço"><br>
   <button type="button" onclick="createGame()">Enviar</button>
+  <hr>
+  <h4>Editar game</h4>
+  <input type="number" name="idEdit" id="idEdit" placeholder="Id" readonly hidden>
+  <input type="text" name="titleEdit" id="titleEdit" placeholder="Titulo"><br>
+  <input type="number" name="yearEdit" id="yearEdit" placeholder="Ano"><br>
+  <input type="number" name="priceEdit" id="priceEdit" placeholder="Preço"><br>
+  <button type="button" onclick="editGame()">Editar</button>
 
 
 
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+
+      function fillGame(listItem){
+        const idInput = document.getElementById("idEdit");
+        const titleInput = document.getElementById("titleEdit");
+        const yearInput = document.getElementById("yearEdit");
+        const priceInput = document.getElementById("priceEdit");
+
+        idInput.value = listItem.getAttribute("data-id");
+        titleInput.value = listItem.getAttribute("data-title");
+        yearInput.value = listItem.getAttribute("data-year");
+        priceInput.value = listItem.getAttribute("data-price");
+      }
+
+      function editGame(){
+        const titleInput = document.getElementById("titleEdit");
+        const yearInput = document.getElementById("yearEdit");
+        const priceInput = document.getElementById("priceEdit");
+        const id = document.getElementById("idEdit").value;
+        const gameEdit = {
+          title: titleInput.value,
+          year: yearInput.value,
+          price: priceInput.value
+        }
+        axios.put(`http://localhost:3000/games/${id}`, gameEdit).then(response => {
+          alert("Game atualizado");
+        }).catch(error => {
+          console.log(error);
+        });
+        window.location.reload(true);
+      }
+
 
       function deleteGame(listItem){
         const id = listItem.getAttribute("data-id");
@@ -73,7 +111,14 @@
           deleteGame(item);
         });
 
+        const editBtn = document.createElement("button");
+        editBtn.innerHTML = "Editar";
+        editBtn.addEventListener("click", function(){
+          fillGame(item);
+        });
+
         item.appendChild(deleteBtn);
+        item.appendChild(editBtn);
         list.appendChild(item);
       });
     }).catch(error => {
