@@ -12,23 +12,38 @@ app.use(cors());
 let DB = {
   games: [
     {
-      id:23,
+      id:1,
       title: 'Call od duty',
       year: 2019,
       price: 60
     },
     {
-      id:65,
+      id:2,
       title: 'Sea of thieves',
       year: 2018,
       price: 40
     },
     {
-      id:2,
+      id:3,
       title: 'Minecraft',
       year: 2012,
       price: 20
     }
+  ],
+  users:[
+    {
+      id: 1,
+      name: "fulano",
+      email: "fulano@gmail.com",
+      password: "123"
+    },
+    {
+      id: 2,
+      name: "ciclano",
+      email: "ciclano@email.com",
+      password: "123"
+    }
+
   ]
 }
 
@@ -57,9 +72,13 @@ app.get('/games/:id', (req, res) => {
 
 app.post('/games',(req, res) => {
   const {title, year, price} = req.body;
+  console.log(title)
+  if(!title || !year ||!price){
+    return;
+  }
 
   DB.games.push({
-    id: 2323,
+    id: parseInt(DB.games.length) + 1,
     title: title,
     year: year,
     price: price
@@ -108,6 +127,31 @@ app.put('/games/:id',(req, res) => {
       res.sendStatus(404);
     }   
     
+  }
+});
+
+app.post('/auth', (req, res) => {
+  const {email, password} = req.body;
+
+  if(email != undefined){
+    const user = DB.users.find(u => u.email == email);
+    if(user != undefined){
+      if(user.password == password){
+        res.status = 200;
+        res.json({token: "token falso"});
+      }else{
+        res.status = 401;
+        res.json({err: "Crendenciais inválidas"});
+      }
+
+    }else{
+      res.status = 404;
+      res.json({err: "E-mail não existe"});
+    }
+
+  }else{
+    res.status = 400;
+    res.json({err: "Email inválido"});
   }
 });
 
