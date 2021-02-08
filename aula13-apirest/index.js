@@ -73,7 +73,7 @@ let DB = {
 app.get('/games',auth,  (req, res) => {
   const games =  DB.games;
   res.statusCode = 200;
-  res.json({user: req.loggedUser, games: games});
+  res.json(games);
 });
 
 
