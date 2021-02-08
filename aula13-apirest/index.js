@@ -10,6 +10,27 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cors());
 
+function auth(req, res, next){
+  const authToken = req.headers['authorization'];
+  if(authToken != undefined){
+    const bearer = authToken.split(' ');
+    const token = bearer[1];
+    jwt.verify(token, JWTsecret, (err, data) => {
+      if(err){
+        res.status(401);
+        res.json({err: 'Token inválido'});
+      }else{
+        req.token = token;
+        req.loggedUser = {id: data.id, email: data.email};
+        next();
+      }
+    });
+
+  }else{
+    res.status(401);
+    res.json({err: 'Token inválido'})
+  }
+}
 
 let DB = {
   games: [
@@ -49,14 +70,14 @@ let DB = {
   ]
 }
 
-app.get('/games',  (req, res) => {
+app.get('/games',auth,  (req, res) => {
   const games =  DB.games;
   res.statusCode = 200;
-  res.json(games);
+  res.json({user: req.loggedUser, games: games});
 });
 
 
-app.get('/games/:id', (req, res) => {
+app.get('/games/:id',auth, (req, res) => {
   if(isNaN(req.params.id)){
     res.sendStatus(400);
   }else{
@@ -72,7 +93,7 @@ app.get('/games/:id', (req, res) => {
   }
 });
 
-app.post('/games',(req, res) => {
+app.post('/games',auth,(req, res) => {
   const {title, year, price} = req.body;
   console.log(title)
   if(!title || !year ||!price){
@@ -89,7 +110,7 @@ app.post('/games',(req, res) => {
   res.sendStatus(200);
 });
 
-app.delete('/games/:id',(req, res) => {
+app.delete('/games/:id',auth,(req, res) => {
   
   if(isNaN(req.params.id)){
     res.sendStatus(400);
@@ -105,7 +126,7 @@ app.delete('/games/:id',(req, res) => {
   }
 });
 
-app.put('/games/:id',(req, res) => {
+app.put('/games/:id',auth,(req, res) => {
   if(isNaN(req.params.id)){
     res.sendStatus(400);
   }else{
@@ -139,7 +160,9 @@ app.post('/auth', (req, res) => {
     const user = DB.users.find(u => u.email == email);
     if(user != undefined){
       if(user.password == password){
-        jwt.sign({id: user.id, email: user.email}, JWTsecret, {expiresIn: '48h'}, (err, token) => {
+        jwt.sign({id: user.id, email: user.email}, 
+                  JWTsecret,
+                  {expiresIn: '48h'}, (err, token) => {
           if(err){
             res.status(400);
             res.json({token: "falha interna"});
