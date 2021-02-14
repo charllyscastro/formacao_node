@@ -32,7 +32,11 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-
+    const axiosConfig = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("token")
+      }
+    }
     function login(){
       const emailField = document.getElementById('email');
       const passwordField = document.getElementById('password');
@@ -43,16 +47,15 @@
         password
       }).then(res => {
         const token = res.data.token;
+        localStorage.setItem('token', token);
+        axiosConfig.headers.Authorization = "Bearer " + localStorage.getItem("token")
+        window.location.reload(true);
       }).catch(error => {
         alert( 'login incorreto')
       })
     }
 
-    const axiosConfig = {
-      headers: {
-        Authorization: "Bearer " + token
-      }
-    }
+    
 
       function fillGame(listItem){
         const idInput = document.getElementById("idEdit");
@@ -76,7 +79,7 @@
           year: yearInput.value,
           price: priceInput.value
         }
-        axios.put(`http://localhost:3000/games/${id}`, gameEdit).then(response => {
+        axios.put(`http://localhost:3000/games/${id}`, axiosConfig, gameEdit).then(response => {
           alert("Game atualizado");
         }).catch(error => {
           console.log(error);
@@ -87,7 +90,7 @@
 
       function deleteGame(listItem){
         const id = listItem.getAttribute("data-id");
-        axios.delete(`http://localhost:3000/games/${id}`).then(response => {
+        axios.delete(`http://localhost:3000/games/${id}`, axiosConfig).then(response => {
           alert("Game deletado");
         }).catch(error => {
           console.log(error);
@@ -105,7 +108,7 @@
           year: yearInput.value,
           price: priceInput.value
         }
-        axios.post('http://localhost:3000/games', game).then(response => {
+        axios.post('http://localhost:3000/games', axiosConfig, game).then(response => {
           if(response.status == 200){
             alert('produto cadastrado com sucesso!')
             titleInput.value = "";

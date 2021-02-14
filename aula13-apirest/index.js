@@ -71,9 +71,28 @@ let DB = {
 }
 
 app.get('/games',auth,  (req, res) => {
+
+  const HATEOS = [
+    {
+      href: "http://localhost:3000/game/0",
+      method: "DELETE",
+      rel: "delete_game"
+    },
+    {
+      href: "http://localhost:3000/game/0",
+      method: "GET",
+      rel: "get_game"
+    },
+    {
+      href: "http://localhost:3000/auth",
+      method: "POST",
+      rel: "login"
+    },
+
+  ]
   const games =  DB.games;
   res.statusCode = 200;
-  res.json(games);
+  res.json({games: games, _links: HATEOS});
 });
 
 
