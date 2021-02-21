@@ -75,7 +75,7 @@ database.where({id: 1}).update({preco: 50}).table('games').then(data => {
 })
 */
 /*OrderBY
-database.select(["nome"]).table("games").orderBy("id", "desc").then(data => {
+database.select(["nome"]).table("games").orderBy("id", "desc").then(data => { //desc | asc
   console.log(data);
 }).catch(err => {
   console.log(err);
