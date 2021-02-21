@@ -41,4 +41,19 @@ database.insert({nome: "Mists", preco: 25}).into('games').then(data => {
 });
 */
 
+/*Where
+database.select().whereRaw("nome = 'Call of duty' OR preco > 25 ")
+        .table('games').then(data => {
+          console.log(data);
+        }).catch(err => {
+          console.log(err);
+        })
+*/
 
+/*Raw
+database.raw("SELECT * FROM games").then(data => {
+  console.log(data)
+}).catch(err => {
+  console.log(err)
+})
+*/
