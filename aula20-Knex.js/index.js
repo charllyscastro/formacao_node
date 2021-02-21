@@ -145,3 +145,17 @@ database.select(["estudios.nome as estudio_nome", "games.nome as game_nome", "ga
           console.log(err)
         })
 */
+/*Transaction
+async function transacao(){
+  try{
+    await database.transaction(async trans => {
+      await trans.insert({nome: "Pyxerelia"}).table("estudios");
+      await trans.insert({nome: "Mojang"}).table("estudios");
+      await trans.insert({nome: "GearBox"}).table("estudios");
+    })
+  }catch(err){
+    console.log(err)
+  }
+}
+transacao();
+*/
