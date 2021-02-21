@@ -81,3 +81,13 @@ database.select(["nome"]).table("games").orderBy("id", "desc").then(data => { //
   console.log(err);
 })
 */
+/*Associate inserts
+database.insert({
+  nome: "EA Sports",
+  game_id: 5
+}).table("estudios").then(data => {
+  console.log(data);
+}).catch(err => {
+  console.log(err);
+})
+*/
