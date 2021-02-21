@@ -7,6 +7,7 @@ const dados = [
   }
 ]
 
+
 /** 
  * ---Insert---
  database.insert(dados).into('games').then(data => {
@@ -66,8 +67,17 @@ database.where({id: 2}).delete().table('games').then(data => {
   }) 
 */
 
+/*Update
 database.where({id: 1}).update({preco: 50}).table('games').then(data => {
   console.log(data);
 }).catch(err => {
   console.log(err);
 })
+*/
+/*OrderBY
+database.select(["nome"]).table("games").orderBy("id", "desc").then(data => {
+  console.log(data);
+}).catch(err => {
+  console.log(err);
+})
+*/
