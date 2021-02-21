@@ -110,7 +110,7 @@ database.select(["games.*", "estudios.nome as estudio_nome"])
           console.log(err);
       })
 */
-/*
+/*Relacionamento de 1 para N
 database.select(["games.*", "estudios.nome as estudio_nome"]).table("games").innerJoin("estudios","estudios.game_id","games.id")
   .then(data => {
     let game = {
@@ -131,4 +131,17 @@ database.select(["games.*", "estudios.nome as estudio_nome"]).table("games").inn
 }).catch(err => {
     console.log(err);
 })
+*/
+/*Realcionamento many to many
+database.select(["estudios.nome as estudio_nome", "games.nome as game_nome", "games.preco"])
+        .table("games_estudios")
+        .innerJoin("games","games.id","games_estudios.game_id")
+        .innerJoin("estudios","estudios.id","games_estudios.estudio_id")
+        .where("estudios.id", 2)
+        .then(data => {       
+          console.log(data);
+        })
+        .catch(err => {
+          console.log(err)
+        })
 */
