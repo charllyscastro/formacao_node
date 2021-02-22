@@ -2,8 +2,8 @@
   <div id="app">
     <h1>Guia Clientes</h1>
     <input type="text" v-model="clienteTeste.nome">
-    <!-- <Cliente :nome="nome" email="fulano@email.com" idade="23"/> -->
-    <Cliente :cliente="clienteTeste"/>
+    <button v-on:click="show = !show">{{show ? "esconder idade" : "mostrar idade"}}</button>
+    <Cliente :cliente="clienteTeste" :showIdade="show"/>
     <!-- <Produto /> -->
   </div>
 </template>
@@ -16,12 +16,12 @@ export default {
   name: 'App',
   data(){
     return{
-      nome: "Fulano",
       clienteTeste: {
         nome: "Ciclano",
         email: "ciclano@email.com",
         idade: 99
-      }
+      },
+      show: false
     }
   },
   components: {
