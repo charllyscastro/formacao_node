@@ -5,9 +5,9 @@
     <button v-on:click="show = !show">{{show ? "esconder idade" : "mostrar idade"}}</button>
     <Cliente :cliente="clienteTeste" :showIdade="show"/>
 
-    <div v-for="(cliente, index) in clientes" :key="cliente.id">
-      <p>{{index +1 }}</p>
+    <div v-for="(cliente) in clientes" :key="cliente.id">
       <Cliente :cliente="cliente" :showIdade="show"/>
+      <h4>Edição</h4>
       <input type="text" v-model="cliente.nome">
       <input type="text" v-model="cliente.email">
     </div>

@@ -1,9 +1,10 @@
 <template>
-  <div :class="{'cliente': isPremium, 'cliente-premium': !isPremium}">
+  <div :class="{'cliente': !isPremium, 'cliente-premium': isPremium}">
     <h2>Nome: {{cliente.nome}}</h2>
     <p>Email: {{cliente.email}}</p>
     <p v-if="showIdade">Idade: {{cliente.idade}}</p>
     <p v-else>A idade foi escondida</p>
+    <button @click="mudaCor">mudar cor</button>
   </div>
 </template>
 
@@ -12,12 +13,17 @@
 export default {
   data(){
     return{
-      isPremium: true
+      isPremium: false
     }
   },
   props: {
     cliente: Object,
     showIdade: Boolean,
+  },
+  methods: {
+    mudaCor: function(){
+      this.isPremium = !this.isPremium;
+    }
   }
 }
 </script>
