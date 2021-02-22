@@ -1,10 +1,14 @@
 <template>
-  <h2>Cliente aqui!</h2>
+  <h2>{{nome}}</h2>
 </template>
 
 <script>
 export default {
-  
+  data(){
+    return{
+      nome: "Fulano"
+    }
+  }
 }
 </script>
 
