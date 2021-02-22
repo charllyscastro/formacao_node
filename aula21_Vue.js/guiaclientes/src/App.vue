@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <div class="buttons">
+      <button class="button is-primary">Primary</button>
+      <button class="button is-link">Link</button>
+    </div>
     <h1>Guia Clientes</h1>
     <button v-on:click="show = !show">{{show ? "esconder idade" : "mostrar idade"}}</button>
     <h3>Cadastro</h3>
