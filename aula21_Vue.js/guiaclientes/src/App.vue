@@ -3,7 +3,8 @@
     <h1>Guia Clientes</h1>
     <input type="text" v-model="clienteTeste.nome">
     <button v-on:click="show = !show">{{show ? "esconder idade" : "mostrar idade"}}</button>
-    <Cliente :cliente="clienteTeste" :showIdade="show"/>
+    <button v-on:click="premium = !premium">Eh premium</button>
+    <Cliente :cliente="clienteTeste" :showIdade="show" :showPremium="premium"/>
     <!-- <Produto /> -->
   </div>
 </template>
@@ -11,7 +12,6 @@
 <script>
 import Cliente from './components/Cliente';
 // import Produto from './components/Produto.vue';
-
 export default {
   name: 'App',
   data(){
@@ -21,7 +21,8 @@ export default {
         email: "ciclano@email.com",
         idade: 99
       },
-      show: false
+      show: false,
+      premium: false
     }
   },
   components: {
