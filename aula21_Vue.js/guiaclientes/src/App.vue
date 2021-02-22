@@ -10,7 +10,7 @@
     <button @click="cadastrarUsuario">Cadastrar</button>
     <hr>
     <div v-for="cliente in clientes" :key="cliente.id">
-      <Cliente :cliente="cliente" :showIdade="show"/>
+      <Cliente :cliente="cliente" :showIdade="show" @meDelete="deletarUsuario"/>
     </div>
   </div>
 </template>
@@ -61,7 +61,12 @@ export default {
       this.idadeField = 0,
       this.deuErro = false
        }
-    } 
+    },
+    deletarUsuario: function($event){
+      const id = $event.idDoCliente;
+      const novoArray = this.clientes.filter(cliente => cliente.id != id);
+      this.clientes = novoArray;
+    }
   }
 }
 </script>

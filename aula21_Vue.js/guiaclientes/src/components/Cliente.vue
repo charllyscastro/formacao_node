@@ -1,10 +1,12 @@
 <template>
   <div :class="{'cliente': !isPremium, 'cliente-premium': isPremium}">
     <h2>Nome: {{cliente.nome}}</h2>
-    <p>Email: {{cliente.email}}</p>
+    <p>Email: {{cliente.email | processarEmail}}</p>
     <p v-if="showIdade">Idade: {{cliente.idade}}</p>
     <p v-else>A idade foi escondida</p>
     <button @click="mudaCor">mudar cor</button>
+    <button @click="emitirEventoDelete">Deletar</button>
+    <h4>Id processado: {{idProcessado}}</h4>
   </div>
 </template>
 
@@ -23,6 +25,19 @@ export default {
   methods: {
     mudaCor: function(){
       this.isPremium = !this.isPremium;
+    },
+    emitirEventoDelete: function(){
+      this.$emit("meDelete", {idDoCliente: this.cliente.id ,component: this});
+    }
+  },
+  filters: {
+    processarEmail: function(value){
+      return `Vuejs ${value.toUpperCase()}`; 
+    }
+  },
+  computed: {
+    idProcessado: function(){
+      return (this.cliente.email + this.cliente.nome).toUpperCase();
     }
   }
 }
