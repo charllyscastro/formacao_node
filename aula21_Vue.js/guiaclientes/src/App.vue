@@ -9,7 +9,7 @@
     <input type="number" placeholder="idade" v-model="idadeField"><br>
     <button @click="cadastrarUsuario">Cadastrar</button>
     <hr>
-    <div v-for="cliente in clientes" :key="cliente.id">
+    <div v-for="cliente in orderClientes" :key="cliente.id">
       <Cliente :cliente="cliente" :showIdade="show" @meDelete="deletarUsuario"/>
     </div>
   </div>
@@ -17,6 +17,7 @@
 
 <script>
 import Cliente from './components/Cliente';
+import _ from 'lodash';
 export default {
   name: 'App',
   data(){
@@ -67,7 +68,13 @@ export default {
       const novoArray = this.clientes.filter(cliente => cliente.id != id);
       this.clientes = novoArray;
     }
+  },
+  computed: {
+    orderClientes: function(){
+      return _.orderBy(this.clientes,['id'],['desc']);
+    }
   }
+
 }
 </script>
  

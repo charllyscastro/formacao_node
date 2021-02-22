@@ -48,13 +48,13 @@ export default {
     background-color: #ccc;
     padding: 2%;
     margin-bottom: 10px;
-    height: 168px;
+    height: 200px;
   }
   .cliente-premium{
     background-color: rgb(207, 62, 62);
     color: white;
     padding: 2%;
     margin-bottom: 10px;
-    height: 168px;
+    height: 200px;
   }
 </style>
