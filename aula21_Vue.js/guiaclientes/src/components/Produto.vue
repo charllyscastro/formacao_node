@@ -1,13 +1,17 @@
 <template>
   <div id="produto">
-    <h2>Produtos</h2>
-    <input type="text" placeholder="Insira seu produto">
+    <h2>{{nome}}</h2>
+    <input type="text" v-model="nome">
   </div>
 </template>
 
 <script>
 export default {
-
+  data(){
+    return{
+      nome: "Ciclano"
+    }
+  }
 }
 </script>
 
@@ -15,9 +19,6 @@ export default {
   #produto{
     color: blue;
     width: 100%;
-    display:flex;
-    align-items: center;
-    justify-content: left;
   }
   h2{
     margin-right: 5px;
