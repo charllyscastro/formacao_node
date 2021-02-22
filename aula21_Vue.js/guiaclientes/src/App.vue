@@ -3,7 +3,8 @@
     <h1>Guia Clientes</h1>
     <button v-on:click="show = !show">{{show ? "esconder idade" : "mostrar idade"}}</button>
     <h3>Cadastro</h3>
-    <input type="text" placeholder="nome" v-model="nomeField"><br>
+    <input type="text" placeholder="nome" v-model="nomeField">
+    <small id="nome-erro" v-show="deuErro">Nome é inválido</small><br>
     <input type="email" placeholder="email" v-model="emailField"><br>
     <input type="number" placeholder="idade" v-model="idadeField"><br>
     <button @click="cadastrarUsuario">Cadastrar</button>
@@ -20,6 +21,7 @@ export default {
   name: 'App',
   data(){
     return{
+        deuErro: false,
         nomeField: "",
         emailField: "",
         idadeField: 0,
@@ -44,21 +46,29 @@ export default {
     Cliente,
   },
   methods: {
-     cadastrarUsuario: function(){  
-       this.clientes.push({
-        id: Date.now(),
-        nome: this.nomeField,
-        email: this.emailField,
-        idade: this.idadeField
-     })
-    this.nomeField = "",
-    this.emailField = "",
-    this.idadeField = 0
+     cadastrarUsuario: function(){ 
+       if(this.nomeField == "" || this.nomeField.length < 3){
+         this.deuErro = true;
+       }else{
+         this.clientes.push({
+          id: Date.now(),
+          nome: this.nomeField,
+          email: this.emailField,
+          idade: this.idadeField
+       })
+      this.nomeField = "",
+      this.emailField = "",
+      this.idadeField = 0,
+      this.deuErro = false
+       }
     } 
   }
 }
 </script>
  
 <style>
-
+  #nome-erro{
+    color: red;
+    padding-left: 10px;
+  }
 </style>
