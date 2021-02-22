@@ -3,15 +3,19 @@
     <h1>Guia Clientes</h1>
     <input type="text" v-model="clienteTeste.nome">
     <button v-on:click="show = !show">{{show ? "esconder idade" : "mostrar idade"}}</button>
-    <button v-on:click="premium = !premium">Eh premium</button>
-    <Cliente :cliente="clienteTeste" :showIdade="show" :showPremium="premium"/>
-    <!-- <Produto /> -->
+    <Cliente :cliente="clienteTeste" :showIdade="show"/>
+
+    <div v-for="(cliente, index) in clientes" :key="cliente.id">
+      <p>{{index +1 }}</p>
+      <Cliente :cliente="cliente" :showIdade="show"/>
+      <input type="text" v-model="cliente.nome">
+      <input type="text" v-model="cliente.email">
+    </div>
   </div>
 </template>
 
 <script>
 import Cliente from './components/Cliente';
-// import Produto from './components/Produto.vue';
 export default {
   name: 'App',
   data(){
@@ -21,13 +25,31 @@ export default {
         email: "ciclano@email.com",
         idade: 99
       },
-      show: false,
-      premium: false
+      clientes: [
+        { 
+          id: 1,
+          nome: "Ciclano",
+          email: "ciclano@email.com",
+          idade: 12
+        },
+        { 
+          id: 2,
+          nome: "Fulano",
+          email: "fulano@email.com",
+          idade: 45
+        },
+        { 
+          id: 3,
+          nome: "Beltrano",
+          email: "beltrano@email.com",
+          idade: 23
+        }
+      ],
+      show: false
     }
   },
   components: {
     Cliente,
-    // Produto
   }
 }
 </script>

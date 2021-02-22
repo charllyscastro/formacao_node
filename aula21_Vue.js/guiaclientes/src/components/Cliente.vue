@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'cliente': showPremium, 'cliente-premium': !showPremium}">
+  <div :class="{'cliente': isPremium, 'cliente-premium': !isPremium}">
     <h2>Nome: {{cliente.nome}}</h2>
     <p>Email: {{cliente.email}}</p>
     <p v-if="showIdade">Idade: {{cliente.idade}}</p>
@@ -8,16 +8,16 @@
 </template>
 
 <script>
+
 export default {
   data(){
     return{
-
+      isPremium: true
     }
   },
   props: {
     cliente: Object,
     showIdade: Boolean,
-    showPremium: Boolean
   }
 }
 </script>
